@@ -1,19 +1,26 @@
 package ru.javawebinar.topjava.model;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@Entity
+@Table(name = "meal")
 public class Meal extends AbstractBaseEntity {
+    @Column(name = "date_time",nullable = false,updatable = false)
+    @NotBlank
     private LocalDateTime dateTime;
-
+    @Column(name = "description")
+    @NotBlank
     private String description;
-
+    @Column(name = "calories")
+    @NotBlank
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Meal() {
